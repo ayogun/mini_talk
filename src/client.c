@@ -6,12 +6,13 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:44:06 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/02 22:51:29 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/03 00:54:43 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
+// kill() is used to send signal to process
 int	main(int argc, char *argv[])
 {
    int	pid;
