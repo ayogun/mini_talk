@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:46:00 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/02 00:57:24 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/02 22:51:55 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,3 +14,4 @@
 # include <unistd.h>
 # include <string.h>
 # include <stdlib.h>
+# include <stdio.h>
