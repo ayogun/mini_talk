@@ -6,35 +6,38 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:43:56 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/03 22:34:40 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/03 23:50:23 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 
-// Why would I use signal while there is a better version of it which is sigaction YAY
-void	handler_sigusr(int signum)
+// Why would I use signal while there is a better version of it which is sigaction YAY.
+// Sigaction is more ortable.
+static void	action(int sig, siginfo_t *info, void *context)
 {
-   static char	c = 0xFF;
-   static int	bits = 0;
+	static int				i = 0;
+	static unsigned char	c = 0;
+	pid_t					pid_client;
 
-   if (signum == SIGUSR1)
-   {
-   	printf("0");
-   	c ^= 0x80 >> bits;
-   }
-   else if (signum == SIGUSR2)
-   {
-   	printf("1");
-   	c |= 0x80 >> bits;
-   }
-   bits++;
-   if (bits == 8)
-   {
-   	printf("-> %c\n", c);
-   	bits = 0;
-   	c = 0xFF;
-   }
+	(void)context;
+	if (info->si_pid)
+		pid_client = info->si_pid;
+	c = c | (sig == SIGUSR1);
+	if (++i == 8)
+	{
+		i = 0;
+		if (!c)
+		{
+			kill(pid_client, SIGUSR1);
+			return ;
+		}
+		ft_putchar_fd(c, 1);
+		c = 0;
+		kill(pid_client, SIGUSR2);
+	}
+	else
+		c = c << 1;
 }
 
 // If SA_SIGINFO is set and the signal is caught, the signal-catching function shall be entered as:
