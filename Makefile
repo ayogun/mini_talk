@@ -6,7 +6,7 @@
 #    By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 00:49:05 by yogun             #+#    #+#              #
-#    Updated: 2022/09/05 00:09:36 by yogun            ###   ########.fr        #
+#    Updated: 2022/09/05 01:25:32 by yogun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,8 @@ CLEANED		=	echo "\n $(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" files
 FCLEANED	=	echo "\n $(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
 
 # ------------------------------ Rules ------------------------------
+
+bonus: all
 
 all: $(NAME)
 
