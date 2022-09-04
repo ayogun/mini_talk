@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:44:06 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/05 00:18:23 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/05 00:24:23 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 */
 static void	ft_exit_failure(void)
 {
-	//write(1, "Usage case: \"./client SERVER_PID MESSAGE\" \n", 44);
 	ft_putstr_fd("Usage case: \"./client SERVER_PID MESSAGE\" \n", STDOUT_FILENO);
 	exit(EXIT_FAILURE);
 }
@@ -48,7 +47,8 @@ static void	action(int signal)
 	SIGUSR1 : 1, SIGUSR2 : 0
 	Bits are being sent from left to right. 
 	This is why I shift bits to right direction.
-	after I send the first bit, I shift them right and second bit become the first one.
+	after I send the first bit, I shift them right
+	and second bit become the first one.
 	And so on and so on.
 */
 static void	send_signal(pid_t pid, char *str)

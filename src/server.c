@@ -6,13 +6,16 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:43:56 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/04 23:58:13 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/05 00:21:46 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minitalk.h"
 #include <stdio.h>
 
+/*
+	Values are initialized
+*/
 void	var_init(t_message *var)
 {
 	var->char_value = 0;
@@ -20,9 +23,11 @@ void	var_init(t_message *var)
 }
 
 /*	
-	Why would I use signal while there is a better version of it which is sigaction YAY.
-	Sigaction is more ortable. I use struct instead of global variable.
-	OR bitwise operator transfer the signal. Char bytes are filled from left to right. This is why we shift the bits to the left.
+	Sigaction is more ortable. 
+	I use struct instead of global variable.
+	OR bitwise operator transfer the signal. 
+	Char bytes are filled from left to right. T
+	his is why we shift the bits to the left.
 	So, first I fill the last bit then 7th then 6th and so on.
 */
 static void	action(int sig, siginfo_t *info, void *context)
@@ -32,7 +37,6 @@ static void	action(int sig, siginfo_t *info, void *context)
 	(void)context;
 	if (message.pid != info->si_pid)
 		var_init(&message);
-
 	if (info->si_pid)
 		message.pid = info->si_pid;
 	(message.char_value) = (message.char_value) | (sig == SIGUSR1);
@@ -51,14 +55,17 @@ static void	action(int sig, siginfo_t *info, void *context)
 		(message.char_value) = (message.char_value) << 1;
 }
 
-// If SA_SIGINFO is set and the signal is caught, the signal-catching function shall be entered as:
-// void func(int signo, siginfo_t *info, void *context);
-// STDOUT_FILENO	1	/* standard output file descriptor */
+/*
+	If SA_SIGINFO is set and the signal is caught, 
+	the signal-catching function shall be entered as:
+	void func(int signo, siginfo_t *info, void *context);
+	STDOUT_FILENO	1	/* standard output file descriptor 
+*/
 int	main(void)
 {
 	struct sigaction	sa;
 	pid_t				pid_server;
-	
+
 	pid_server = getpid();
 	ft_putstr_fd("Server PID: ", STDOUT_FILENO);
 	ft_putnbr_fd(pid_server, STDOUT_FILENO);
@@ -73,5 +80,3 @@ int	main(void)
 		pause();
 	return (0);
 }
-
-
