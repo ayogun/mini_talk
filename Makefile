@@ -6,7 +6,7 @@
 #    By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/09/02 00:49:05 by yogun             #+#    #+#              #
-#    Updated: 2022/09/04 14:53:26 by yogun            ###   ########.fr        #
+#    Updated: 2022/09/05 00:09:36 by yogun            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,8 +36,8 @@ INCLUDE		=	-I include
 
 SERVER_NAME	=	server
 
-CLIENT_NAME1	=	client_1
-CLIENT_NAME2	=	client_2
+CLIENT_NAME1	=	client1
+CLIENT_NAME2	=	client2
 
 NAME		=	server
 
@@ -53,15 +53,15 @@ NO_COLOR	=	\033[0m
 
 # ------------------------------ Messages ------------------------------
 
-COMP_START	=	echo "\n🚂 $(BOLD_YELLOW)Make: $(NO_COLOR)Starting the compilation...\n"
+COMP_START	=	echo "\n $(BOLD_YELLOW)Make: $(NO_COLOR)Starting the compilation...\n"
 
-SERV_READY	=	echo "\n📥 Server is ready 👌!\n"
+SERV_READY	=	echo "\n Server is ready!\n"
 
-CLI_READY	=	echo "\n💻 Client is ready 👌!\n"
+CLI_READY	=	echo "\n Client is ready!\n"
 
-CLEANED		=	echo "\n💧 $(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" files \n"
+CLEANED		=	echo "\n $(BOLD_YELLOW)Clean: $(NO_COLOR)Removed all the \".o\" files \n"
 
-FCLEANED	=	echo "\n🧼 $(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
+FCLEANED	=	echo "\n $(BOLD_YELLOW)Fclean: $(NO_COLOR)Removed the executables \n"
 
 # ------------------------------ Rules ------------------------------
 

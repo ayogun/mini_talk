@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:43:56 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/04 21:44:37 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/04 23:58:13 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	var_init(t_message *var)
 	var->bit_pos = 0;
 }
 
-// Why would I use signal while there is a better version of it which is sigaction YAY.
-// Sigaction is more ortable. I use struct instead of global variable.
-// OR bitwise operator transfer the signal 
-// Char bytes are filled from left to right. This is why we shift the bits to the left.
-// So, first I fill the last bit then 7th then 6th and so on.
+/*	
+	Why would I use signal while there is a better version of it which is sigaction YAY.
+	Sigaction is more ortable. I use struct instead of global variable.
+	OR bitwise operator transfer the signal. Char bytes are filled from left to right. This is why we shift the bits to the left.
+	So, first I fill the last bit then 7th then 6th and so on.
+*/
 static void	action(int sig, siginfo_t *info, void *context)
 {
-	//pid_t				pid_client;
 	static t_message	message;
 
 	(void)context;
@@ -67,7 +67,8 @@ int	main(void)
 	sa.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
-   ft_putchar_fd('\n', 1);
+	ft_putchar_fd('\n', 1);
+	system("leaks server");
 	while (1)
 		pause();
 	return (0);
