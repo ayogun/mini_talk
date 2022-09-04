@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:43:56 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/04 19:54:31 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/04 21:44:37 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,30 +21,30 @@ void	var_init(t_message *var)
 
 // Why would I use signal while there is a better version of it which is sigaction YAY.
 // Sigaction is more ortable. I use struct instead of global variable.
+// OR bitwise operator transfer the signal 
+// Char bytes are filled from left to right. This is why we shift the bits to the left.
+// So, first I fill the last bit then 7th then 6th and so on.
 static void	action(int sig, siginfo_t *info, void *context)
 {
-	pid_t					pid_client;
+	//pid_t				pid_client;
 	static t_message	message;
-
-
 
 	(void)context;
 	if (message.pid != info->si_pid)
 		var_init(&message);
 
-	message.pid = info->si_pid;
 	if (info->si_pid)
-		pid_client = info->si_pid;
+		message.pid = info->si_pid;
 	(message.char_value) = (message.char_value) | (sig == SIGUSR1);
 	if (++(message.bit_pos) == 8)
 	{
 		if (!(message.char_value))
 		{
-			kill(pid_client, SIGUSR1);
+			kill(message.pid, SIGUSR1);
 			return ;
 		}
 		ft_putchar_fd((message.char_value), 1);
-		kill(pid_client, SIGUSR2);
+		kill(message.pid, SIGUSR2);
 		var_init(&message);
 	}
 	else
