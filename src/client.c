@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:44:06 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/04 21:45:34 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/05 00:26:39 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,9 @@
 /*
 	Error handling
 */
-
-static void	ft_exit_failure(void)
+void	ft_exit_failure(void)
 {
-	write(1, "Usage case: \"./client SERVER_PID MESSAGE\" \n", 43);
+	ft_putstr_fd("Usage case: \"./client SERVER_PID MESSAGE\" \n", STDOUT_FILENO);
 	exit(EXIT_FAILURE);
 }
 
@@ -27,8 +26,7 @@ static void	ft_exit_failure(void)
 	every byte(SIGUSR2), and prints out the total
 	when it receives the NULL (SIGUSR1).
 */
-
-static void	action(int signal)
+void	action(int signal)
 {
 	static int	bytes_received = 0;
 
@@ -49,11 +47,11 @@ static void	action(int signal)
 	SIGUSR1 : 1, SIGUSR2 : 0
 	Bits are being sent from left to right. 
 	This is why I shift bits to right direction.
-	after I send the first bit, I shift them right and second bit become the first one.
+	after I send the first bit, I shift them right
+	and second bit become the first one.
 	And so on and so on.
 */
-
-static void	send_signal(pid_t pid, char *str)
+void	send_signal(pid_t pid, char *str)
 {
 	int		i;
 	int		j;
@@ -89,13 +87,14 @@ static void	send_signal(pid_t pid, char *str)
 	4. We call the function send_signal to send each
 	 byte/char in bit
 */
-
 int	main(int argc, char *argv[])
 {
 	int	str_len;
 
+	if (argc != 3)
+		ft_exit_failure();
 	str_len = ft_strlen(argv[2]);
-	if (argc != 3 || !str_len || !ft_atoi(argv[1]))
+	if (!str_len || !ft_atoi(argv[1]))
 		ft_exit_failure();
 	ft_putstr_fd("Bytes sent        : ", STDOUT_FILENO);
 	ft_putnbr_fd(str_len, STDOUT_FILENO);
