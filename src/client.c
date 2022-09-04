@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:44:06 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/03 23:52:46 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/04 21:45:34 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,10 @@ static void	action(int signal)
 	right to left, using str[j] >> i & 1
 	Once sent all  text, we send the "\0".
 	SIGUSR1 : 1, SIGUSR2 : 0
+	Bits are being sent from left to right. 
+	This is why I shift bits to right direction.
+	after I send the first bit, I shift them right and second bit become the first one.
+	And so on and so on.
 */
 
 static void	send_signal(pid_t pid, char *str)
@@ -88,13 +92,13 @@ static void	send_signal(pid_t pid, char *str)
 
 int	main(int argc, char *argv[])
 {
-	int	len_str;
+	int	str_len;
 
-	len_str = ft_strlen(argv[2]);
-	if (argc != 3 || !len_str || !ft_atoi(argv[1]))
+	str_len = ft_strlen(argv[2]);
+	if (argc != 3 || !str_len || !ft_atoi(argv[1]))
 		ft_exit_failure();
 	ft_putstr_fd("Bytes sent        : ", STDOUT_FILENO);
-	ft_putnbr_fd(len_str, STDOUT_FILENO);
+	ft_putnbr_fd(str_len, STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	ft_putstr_fd("Bytes received    : ", STDOUT_FILENO);
 	signal(SIGUSR1, action);
