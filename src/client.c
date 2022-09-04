@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:44:06 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/05 00:24:23 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/05 00:26:39 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 	Error handling
 */
-static void	ft_exit_failure(void)
+void	ft_exit_failure(void)
 {
 	ft_putstr_fd("Usage case: \"./client SERVER_PID MESSAGE\" \n", STDOUT_FILENO);
 	exit(EXIT_FAILURE);
@@ -26,7 +26,7 @@ static void	ft_exit_failure(void)
 	every byte(SIGUSR2), and prints out the total
 	when it receives the NULL (SIGUSR1).
 */
-static void	action(int signal)
+void	action(int signal)
 {
 	static int	bytes_received = 0;
 
@@ -51,7 +51,7 @@ static void	action(int signal)
 	and second bit become the first one.
 	And so on and so on.
 */
-static void	send_signal(pid_t pid, char *str)
+void	send_signal(pid_t pid, char *str)
 {
 	int		i;
 	int		j;

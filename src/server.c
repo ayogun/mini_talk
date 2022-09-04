@@ -6,7 +6,7 @@
 /*   By: yogun <yogun@student.42heilbronn.de>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 00:43:56 by yogun             #+#    #+#             */
-/*   Updated: 2022/09/05 00:21:46 by yogun            ###   ########.fr       */
+/*   Updated: 2022/09/05 00:27:22 by yogun            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	var_init(t_message *var)
 	his is why we shift the bits to the left.
 	So, first I fill the last bit then 7th then 6th and so on.
 */
-static void	action(int sig, siginfo_t *info, void *context)
+void	action(int sig, siginfo_t *info, void *context)
 {
 	static t_message	message;
 
@@ -59,7 +59,7 @@ static void	action(int sig, siginfo_t *info, void *context)
 	If SA_SIGINFO is set and the signal is caught, 
 	the signal-catching function shall be entered as:
 	void func(int signo, siginfo_t *info, void *context);
-	STDOUT_FILENO	1	/* standard output file descriptor 
+	STDOUT_FILENO	1	 standard output file descriptor 
 */
 int	main(void)
 {
@@ -75,7 +75,6 @@ int	main(void)
 	sigaction(SIGUSR1, &sa, NULL);
 	sigaction(SIGUSR2, &sa, NULL);
 	ft_putchar_fd('\n', 1);
-	system("leaks server");
 	while (1)
 		pause();
 	return (0);
