@@ -1,3 +1,11 @@
+
+
+<p align="center">
+<img src="./img/minitalk.png">
+</p>
+
+</br>
+
 # minitalk
 
 <img src="./img/signals.jpg">
